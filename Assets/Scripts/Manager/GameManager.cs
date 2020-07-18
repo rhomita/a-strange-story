@@ -6,6 +6,14 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private Transform player;
 
+    public Transform Player
+    {
+        get
+        {
+            return player;
+        }
+    }
+    
     #region Singleton
     public static GameManager instance { get; private set; }
     void Awake()
@@ -14,12 +22,16 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    public Transform Player
+    void Start()
     {
-        get
+        QuestManager.instance.onQuestDone += remainingQuests =>
         {
-            return player;
-        }
+            Debug.Log("Game manager :: Quests remaining: " + remainingQuests);
+            if (remainingQuests == 0)
+            {
+                Debug.Log("Game manager :: Game finished.");    
+            }
+        };
     }
     
     void EnableCursor()
