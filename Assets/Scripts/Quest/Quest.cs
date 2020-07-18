@@ -4,30 +4,35 @@ using UnityEngine;
 
 public class Quest : MonoBehaviour
 {
-    [SerializeField] private Queue<QuestTask> tasks;
-    [SerializeField] private Quest nextQuest;
+    [SerializeField] private List<QuestTask> initTasks;
+    
+    private Queue<QuestTask> tasks;
+    
+    public delegate void OnComplete();
+    public OnComplete onComplete;
+
+    void Awake()
+    {
+        tasks = new Queue<QuestTask>();
+        initTasks.ForEach(tasks.Enqueue);
+    }
     
     public void Begin()
     {
-        GetTask();
+        StartNextTask();
     }
 
-    private void GetTask()
+    private void StartNextTask()
     {
         if (tasks.Count == 0)
         {
-            End();
+            onComplete?.Invoke();
             return;
         }
+        Debug.Log("Quest :: StartNextTask -> " + gameObject.name);
         QuestTask questTask = tasks.Dequeue();
-        questTask.onComplete += GetTask;
+        questTask.onComplete += StartNextTask;
         questTask.Activate();
     }
 
-    void End()
-    {
-        if (nextQuest == null) return;
-        nextQuest.Begin();
-        Destroy(gameObject);
-    }
 }

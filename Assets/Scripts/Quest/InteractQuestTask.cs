@@ -4,16 +4,19 @@ using System.Linq;
 
 public class InteractQuestTask : QuestTask
 {
+    [SerializeField] private List<Interactable> interactables;
     private int currentQuantity;
-    private List<Interactable> interactables;
 
-    void Awake()
+    void Start()
     {
-        interactables = transform.GetComponentsInChildren<Interactable>().ToList();
         foreach (Interactable interactable in interactables)
         {
-            interactable.onInteract += Progress;
-            interactable.InteractableCollider.enabled = false;
+            interactable.onInteract += (Interactable _interactable) =>
+            {
+                _interactable.Disable();
+                Progress();
+            };
+            interactable.Disable();
         }
     }
 
@@ -22,7 +25,7 @@ public class InteractQuestTask : QuestTask
         base.Activate();
         foreach (Interactable interactable in interactables)
         {
-            interactable.InteractableCollider.enabled = true;
+            interactable.Enable();
         }
     }
 
@@ -43,7 +46,9 @@ public class InteractQuestTask : QuestTask
 
     public override string GetObjectiveText()
     {
-        return objective + $" {currentQuantity}/{interactables.Count}";
+        string text = base.GetObjectiveText();
+        if (interactables.Count == 1) return text;
+        return text + $" {currentQuantity}/{interactables.Count}";
     }
 
 }

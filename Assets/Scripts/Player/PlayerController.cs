@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundMask;
+    
     private CharacterController controller;
+    
     private float speed = 4f;
     private Vector3 velocity;
+    private bool isGrounded;
 
     void Start()
     {
@@ -15,6 +20,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        CheckGround();
+        AddGravity();
+
         GetInput();
     }
 
@@ -50,5 +58,24 @@ public class PlayerController : MonoBehaviour
             _speed *= 1.7f;
         }
         controller.Move(movement * (_speed * Time.fixedDeltaTime));
+    }
+    
+    private void CheckGround()
+    {
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, groundMask);
+    }
+    
+    void AddGravity()
+    {
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -0.5f;
+        }
+        else
+        {
+            velocity.y += (Physics.gravity.y * 1.2f) * Time.deltaTime;
+        }
+
+        velocity.y = Mathf.Clamp(velocity.y, -10, 5);
     }
 }
