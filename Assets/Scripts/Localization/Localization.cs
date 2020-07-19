@@ -36,8 +36,16 @@ public class Localization : MonoBehaviour
 
         // Spanish
         Keys[LANGUAGE_ES]["task1-1"] = "Acomodar la habitación.";
+        
         Keys[LANGUAGE_ES]["task2-1"] = "Recoge la ropa sucia en tu habitación.";
         Keys[LANGUAGE_ES]["task2-2"] = "Lleva la ropa sucia a la lavadora.";
+        
+        Keys[LANGUAGE_ES]["task3-1"] = "Escapate! Busca una puerta para salir.";
+        Keys[LANGUAGE_ES]["task3-2"] = "Tu teléfono está sonando, ve a la habitación a atenderlo!";
+        Keys[LANGUAGE_ES]["task3-3"] = "Busca el teléfono que realmente está sonando.";
+        Keys[LANGUAGE_ES]["task3-4"] = "Apaga el TV.";
+        
+        Keys[LANGUAGE_ES]["task4-1"] = "Ve a la cocina para hablar con tu pareja.";
         
         // English
         // TODO: ADD

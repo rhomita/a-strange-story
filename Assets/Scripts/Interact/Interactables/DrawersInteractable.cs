@@ -2,11 +2,13 @@
 
 public class DrawersInteractable : Interactable
 {
+    [SerializeField] private Animator animator;
+    
     void Start()
     {
         onInteract += _ =>
         {
-            Debug.Log("Add animation");
+            animator.SetBool("show", true);
         };
     }
 }

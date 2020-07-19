@@ -17,7 +17,7 @@ public class House : MonoBehaviour
             Material[] materials = new Material[meshRenderer.materials.Length]; 
             for(int i = 0; i < meshRenderer.materials.Length; i++)
             {
-                if (meshRenderer.materials[i].name == materialReplaceName)
+                if (meshRenderer.materials[i].name.StartsWith(materialReplaceName))
                 {
                     materials[i] = materialReplace;
                 }
