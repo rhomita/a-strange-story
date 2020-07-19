@@ -15,15 +15,28 @@ public class GameUI : MonoBehaviour
         taskText.text = text;
     }
     
-    public void SetSubtitleText(string text)
-    {
-        subtitleText.transform.parent.gameObject.SetActive(text?.Length > 0);
-        subtitleText.text = text;
-    }
-    
     public void SetHintText(string text)
     {
         hintText.transform.parent.gameObject.SetActive(text?.Length > 0);
         hintText.text = text;
+    }
+    
+    public void SetSubtitleText(string text, float secondsToRemove = 0)
+    {
+        subtitleText.transform.parent.gameObject.SetActive(text?.Length > 0);
+        subtitleText.text = text;
+        if (secondsToRemove > 0 && text?.Length > 0)
+        {
+            StartCoroutine(RemoveSubtitleText(text, secondsToRemove));
+        }
+    }
+    
+    private IEnumerator RemoveSubtitleText(string text, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        if (subtitleText.text == text)
+        {
+            SetSubtitleText(null);
+        }
     }
 }

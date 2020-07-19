@@ -1636,6 +1636,14 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0
+    functionName: ShowSubtitle
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 470ec54d5f4a8914983db103a1a050b1,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 11.583333
     functionName: BeginEnd
     data: 

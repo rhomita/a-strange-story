@@ -10,7 +10,7 @@ public class TelephoneInteractable : Interactable
     void Start()
     {
         onEnabledAudioSource = gameObject.AddComponent<AudioSource>();
-        onEnabledAudioSource.loop = false;
+        onEnabledAudioSource.loop = true;
         onEnabledAudioSource.volume = 1f;
         onEnabledAudioSource.spatialBlend = 1f;
         onEnabledAudioSource.playOnAwake = false;
@@ -23,15 +23,6 @@ public class TelephoneInteractable : Interactable
         };
     }
 
-    void Update()
-    {
-        if (!IsActive) return;
-        if (!audioSource.isPlaying)
-        {
-            PlayClip();
-        }
-    }
-    
     public override void Enable()
     {
         base.Enable();

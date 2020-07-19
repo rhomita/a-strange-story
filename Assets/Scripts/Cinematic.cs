@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Cinematic : MonoBehaviour
 {
+    [SerializeField] private GameObject washMachine;
+    [SerializeField] private GameObject fridge;
+    [SerializeField] private GameObject selfFridge;
+    
     private Animator animator;
     private GameObject player;
     private Transform playerCamera;
-    private AudioSource audioSource;
     
     #region Singleton
     public static Cinematic instance { get; private set; }
@@ -19,10 +22,8 @@ public class Cinematic : MonoBehaviour
 
     void Start()
     {
-        audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.loop = false;
-        audioSource.volume = 1f;
-        audioSource.playOnAwake = false;
+        washMachine.SetActive(false);
+        selfFridge.SetActive(false);
     }
     
     public void Begin()
@@ -43,11 +44,37 @@ public class Cinematic : MonoBehaviour
     {
         player.SetActive(false);
         transform.gameObject.SetActive(true);
+        washMachine.SetActive(true);
+        // TODO: Refactor: Avoid getting components here.
+        washMachine.GetComponent<Animator>().SetBool("talking", true);
+        fridge.GetComponent<Animator>().SetBool("talking", true);
         animator.SetTrigger("End");
     }
 
-    public void PlaySound(AudioClip clip)
+    // TODO: This is ugly but there is no more time =(
+    public void StopTalk()
     {
-        audioSource.PlayOneShot(clip);
+        washMachine.GetComponent<Animator>().SetBool("talking", false);
+    }
+    
+    public void StartTalk()
+    {
+        washMachine.GetComponent<Animator>().SetBool("talking", true);
+    }
+
+    public void EnableSelfFridge()
+    {
+        selfFridge.SetActive(true);
+    }
+
+    public void ShowSubtitle(AnimationEvent _event)
+    {
+        AudioClip clip = (AudioClip) _event.objectReferenceParameter;
+        GameManager.instance.AddSubtitle(clip);
+    }
+
+    public void GoToMenu()
+    {
+        GameManager.instance.GoToMenu();
     }
 }

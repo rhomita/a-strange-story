@@ -41,16 +41,10 @@ public class Interactable : MonoBehaviour
         if (!IsActive) return;
         if (audioClip != null)
         {
-            PlayClip();
+            audioSource.PlayOneShot(audioClip);
         }
 
         onInteract?.Invoke(this);
-    }
-
-    protected void PlayClip()
-    {
-        if (!IsActive) return;
-        audioSource.PlayOneShot(audioClip);
     }
 
     public string GetHintText()

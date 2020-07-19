@@ -3,7 +3,10 @@
 public abstract class QuestTask : MonoBehaviour
 {
     [SerializeField] protected string objectiveTextKey;
-
+    [SerializeField] private AudioClip onActivateSubtitleClip;
+    [SerializeField] private AudioClip onProgressSubtitleClip;
+    [SerializeField] private AudioClip onCompleteSubtitleClip;
+    
     public delegate void OnComplete();
     public OnComplete onComplete;
     
@@ -20,6 +23,7 @@ public abstract class QuestTask : MonoBehaviour
         Debug.Log("QuestTask :: Complete -> " + gameObject.name);
         onComplete?.Invoke();
         active = false;
+        GameManager.instance.AddSubtitle(onCompleteSubtitleClip);
     }
 
     public virtual void Progress()
@@ -27,6 +31,7 @@ public abstract class QuestTask : MonoBehaviour
         Debug.Log("QuestTask :: Progress -> " + gameObject.name);
         UpdateTaskText();
         onProgress?.Invoke();
+        GameManager.instance.AddSubtitle(onProgressSubtitleClip);
     }
 
     public virtual void Activate()
@@ -35,6 +40,7 @@ public abstract class QuestTask : MonoBehaviour
         UpdateTaskText();
         onActivate?.Invoke();
         active = true;
+        GameManager.instance.AddSubtitle(onActivateSubtitleClip);
     }
 
     private void UpdateTaskText()

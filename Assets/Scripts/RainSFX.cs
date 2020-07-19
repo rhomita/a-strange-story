@@ -27,7 +27,7 @@ public class RainSFX : MonoBehaviour
             return;
         }
 
-        float volume = Random.Range(0.2f, 0.5f);
+        float volume = Random.Range(0.15f, 0.4f);
         audioSource.volume = volume;
         
         cooldown = Random.Range(10, 30);
