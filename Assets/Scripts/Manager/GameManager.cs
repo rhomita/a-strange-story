@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
         {
             key = clip.name;
         }
+
         string text = Localization.GetText(key);
         float seconds = clip.length;
         audioSource.PlayOneShot(clip);

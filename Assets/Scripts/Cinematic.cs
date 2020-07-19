@@ -7,6 +7,7 @@ public class Cinematic : MonoBehaviour
     [SerializeField] private GameObject washMachine;
     [SerializeField] private GameObject fridge;
     [SerializeField] private GameObject selfFridge;
+    [SerializeField] private AudioSource finalAudio;
     
     private Animator animator;
     private GameObject player;
@@ -60,6 +61,11 @@ public class Cinematic : MonoBehaviour
     public void StartTalk()
     {
         washMachine.GetComponent<Animator>().SetBool("talking", true);
+    }
+
+    public void PlayFinalAudio()
+    {
+        finalAudio.Play();
     }
 
     public void EnableSelfFridge()

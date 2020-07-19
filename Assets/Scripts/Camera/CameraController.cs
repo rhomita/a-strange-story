@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     private Transform player;
 
-    private float xMouseSensivity = 120f;
+    private float xMouseSensivity = 140f;
     private float yMouseSensivity = 160f;
     private float xRotation = 0f;
 

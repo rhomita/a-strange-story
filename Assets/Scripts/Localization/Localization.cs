@@ -81,6 +81,7 @@ public class Localization : MonoBehaviour
         Keys[LANGUAGE_ES]["p-voice-6"] = "Mateo: Noooooooo!!!";
         
         Keys[LANGUAGE_ES]["menu-play-button"] = "Empezar";
+        Keys[LANGUAGE_ES]["menu-exit-button"] = "Salir";
 
         // English
         // TODO: ADD
