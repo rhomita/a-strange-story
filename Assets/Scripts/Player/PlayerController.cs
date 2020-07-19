@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private AudioSource audioSource;
     
     private CharacterController controller;
     
@@ -36,6 +37,18 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
+        if (horizontal == 0 && vertical == 0)
+        {
+            audioSource.Stop();
+        }
+        else
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        
         velocity.x = horizontal;
         velocity.z = vertical;
     }
@@ -48,16 +61,17 @@ public class PlayerController : MonoBehaviour
         right.y = 0;
         Vector3 movement = forward * velocity.z + right * velocity.x;
 
-        bool isRunning = Vector3.Magnitude(movement) > 0;
-
         movement.y = velocity.y;
-
+        
         float _speed = speed;
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            _speed *= 1.7f;
+            _speed *= 1.5f;
         }
-        controller.Move(movement * (_speed * Time.fixedDeltaTime));
+
+        Vector3 controllerMovement = movement * (_speed * Time.fixedDeltaTime);
+        controller.Move(controllerMovement);
+        
     }
     
     private void CheckGround()

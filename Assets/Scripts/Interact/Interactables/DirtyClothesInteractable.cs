@@ -2,12 +2,10 @@
 
 public class DirtyClothesInteractable : Interactable
 {
+    [SerializeField] private GameObject GFX;
+
     void Start()
     {
-        onInteract += _ =>
-        {
-            // TODO: Add sound
-            Destroy(gameObject);
-        };
+        onInteract += _ => { Destroy(GFX); };
     }
 }

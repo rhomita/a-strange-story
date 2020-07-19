@@ -9,18 +9,23 @@ public class PlayerInteract : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && interactables.Count > 0)
+        Interactable interactable = interactables.Count > 0 ? interactables[0] : null;
+        
+        if (Input.GetKeyDown(KeyCode.E) && interactable != null)
         {
-            Interactable interactable = interactables[0];
             interactable.Interact();
             interactables.Remove(interactable);
         }
+
+        string hintText = interactable != null ? interactable.GetHintText() : "";
+        GameManager.instance.UI.SetHintText(hintText);
     }
     
     void OnTriggerEnter(Collider other)
     {
         Interactable interactable = other.GetComponent<Interactable>();
         if (interactable == null) return;
+        if (!interactable.IsActive) return;
         
         if (interactables.Contains(interactable)) return;
         interactables.Add(interactable);

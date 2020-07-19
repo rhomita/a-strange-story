@@ -8,6 +8,7 @@ public class House : MonoBehaviour
     [SerializeField] private Material materialReplace;
     [SerializeField] private string materialReplaceName;
     
+    // Workaround to change all 'black' outlines materials from blender.
     void Awake()
     {
         List<MeshRenderer> meshRenderers = transform.GetComponentsInChildren<MeshRenderer>().ToList();

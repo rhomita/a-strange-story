@@ -40,7 +40,7 @@ public abstract class QuestTask : MonoBehaviour
     private void UpdateTaskText()
     {
         string text = GetObjectiveText();
-        QuestManager.instance.UI.SetTaskText(text);
+        GameManager.instance.UI.SetTaskText(text);
     }
 
     public virtual string GetObjectiveText()

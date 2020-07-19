@@ -5,6 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Transform player;
+    [SerializeField] private GameUI gameUi;
+
+    private Transform playerCamera;
 
     public Transform Player
     {
@@ -14,11 +17,20 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    public GameUI UI
+    {
+        get
+        {
+            return gameUi;
+        }
+    }
+    
     #region Singleton
     public static GameManager instance { get; private set; }
     void Awake()
     {
         instance = this;
+        player.gameObject.SetActive(false);
     }
     #endregion
 
@@ -29,12 +41,27 @@ public class GameManager : MonoBehaviour
             Debug.Log("Game manager :: Quests remaining: " + remainingQuests);
             if (remainingQuests == 0)
             {
-                Debug.Log("Game manager :: Game finished.");    
+                Debug.Log("Game manager :: Game finished.");
+                Cinematic.instance.End();
             }
         };
         HideCursor();
+        
+        UI.SetHintText("");
+        UI.SetSubtitleText("");
+        UI.SetTaskText("");
+        
+        Cinematic.instance.Begin();
     }
-    
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneLoader.Restart();
+        }
+    }
+
     void EnableCursor()
     {
         Cursor.visible = true;
@@ -46,5 +73,5 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
-
+    
 }

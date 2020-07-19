@@ -6,7 +6,6 @@ public class WashMachineInteractable : Interactable
     {
         onInteract += _ =>
         {
-            // TODO
         };
     }
 }

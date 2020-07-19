@@ -4,16 +4,8 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
     [SerializeField] private List<Quest> initQuests;
-    [SerializeField] private QuestUI questUI;
     
     private Queue<Quest> quests;
-    public QuestUI UI
-    {
-        get
-        {
-            return questUI;
-        }
-    }
 
     public static QuestManager instance { get; private set; }
     void Awake()
@@ -26,11 +18,6 @@ public class QuestManager : MonoBehaviour
     public delegate void OnQuestDone(int remainingQuests);
     public OnQuestDone onQuestDone;
 
-    void Start()
-    {
-        Begin();
-    }
-    
     public void Begin()
     {
         StartNextQuest();
