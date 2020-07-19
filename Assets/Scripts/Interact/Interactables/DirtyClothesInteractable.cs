@@ -6,7 +6,8 @@ public class DirtyClothesInteractable : Interactable
     {
         onInteract += _ =>
         {
-            //TODO: Remove clothes
+            // TODO: Add sound
+            Destroy(gameObject);
         };
     }
 }

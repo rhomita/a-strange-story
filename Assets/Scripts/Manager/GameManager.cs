@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Game manager :: Game finished.");    
             }
         };
+        HideCursor();
     }
     
     void EnableCursor()

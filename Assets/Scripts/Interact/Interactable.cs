@@ -13,12 +13,12 @@ public class Interactable : MonoBehaviour
         Disable();
     }
 
-    public void Disable()
+    public virtual void Disable()
     {
         isActive = false;
     }
 
-    public void Enable()
+    public virtual void Enable()
     {
         isActive = true;
     }
