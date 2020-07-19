@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class Interactable : MonoBehaviour
 {
     public delegate void OnInteract(Interactable interactable);

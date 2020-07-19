@@ -7,7 +7,7 @@ public class InteractQuestTask : QuestTask
     [SerializeField] private List<Interactable> interactables;
     private int currentQuantity;
 
-    void Start()
+    void Awake()
     {
         foreach (Interactable interactable in interactables)
         {
